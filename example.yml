@@ -2,23 +2,27 @@
 title: Test adventure
 version: 0.1
 author: Twometer
+start: library
 
 states:
-  - library
+  - name: library
     desc: 'You are in a beautiful library, you can see a book'
     actions:
-      - "open it"
+      - "open it":
         - goto: reading
-      - "hit it with a sword"
+      - "hit it with a sword":
         - out: 'It is exploding in a huge fireball'
-        - gameover
-  - reading
+        - run: gameover
+  - name: reading
     desc: 'This is the mighty book of whateverness. You might go on with care.'
     actions:
-      - "read more"
+      - "read more":
         - out: 'Test 12345'
         - out: '23451 Test'
-      - "stop"
+      - "stop":
         - goto: library
-gameover:
-  - out: "Game Over! You are dead"
+scripts:
+  - gameover:
+    - out: "Game Over! You are dead"
+    - out: "Thank you for playing $title $version"
+    - shutdown
